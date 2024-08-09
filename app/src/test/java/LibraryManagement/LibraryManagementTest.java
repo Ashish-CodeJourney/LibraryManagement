@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -116,5 +118,24 @@ public class LibraryManagementTest {
         });
 
         assertEquals("Book is not borrowed or does not exist.", exception.getMessage());
+    }
+
+    @Test 
+    void Test_ViewAvailableBooks () {
+        Book book1 = new Book("111111111", "Working Effectively with Legacy Code", "Michael C. Feathers", 2005);
+        Book book2 = new Book("222222222", "Clean Code", "Robert C. Martin", 2008);
+        Book book3 = new Book("333333333", "The class of Java", "Pravin Jain", 2010);
+
+
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+
+        List<Book> availableBooks = library.getAvailableBooks();
+
+        assertEquals(3, availableBooks.size()); // Should have two available books
+        assertTrue(availableBooks.contains(book1));
+        assertTrue(availableBooks.contains(book2));
+        assertTrue(availableBooks.contains(book3));
     }
 }
