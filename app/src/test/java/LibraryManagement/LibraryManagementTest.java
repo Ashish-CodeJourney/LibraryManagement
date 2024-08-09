@@ -1,6 +1,7 @@
 package LibraryManagement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -49,5 +50,24 @@ public class LibraryManagementTest {
         });
 
         assertEquals("A book with the same ISBN already exists.", exception.getMessage());
+    }
+
+    @Test
+    void Test_Borrowing_Book () {
+        String isbn = "123456789";
+        String title = "Clean Code";
+        String author = "Robert C. Martin";
+        int publicationYear = 2008;
+
+        Book book = new Book(isbn, title, author, publicationYear);
+
+        // Addding the book first
+        library.addBook(book);
+
+        // Borrowing that book
+        library.borrowBook(book);
+
+        assertEquals(0, library.getAvailableBooks().size()); // Should have no available books after borrowing
+        assertFalse(book.isAvailable());
     }
 }
