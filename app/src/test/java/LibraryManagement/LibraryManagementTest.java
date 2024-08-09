@@ -83,4 +83,26 @@ public class LibraryManagementTest {
 
         assertEquals("Book is not available or does not exist.", exception.getMessage());
     }
+
+    @Test
+    void Test_Returning_Book () {
+        String isbn = "123456789";
+        String title = "Clean Code";
+        String author = "Robert C. Martin";
+        int publicationYear = 2008;
+
+        Book book = new Book(isbn, title, author, publicationYear);
+
+        // Addding the book first
+        library.addBook(book);
+
+        // Borrowing that book
+        library.borrowBook(book);
+
+        // Returning borrowed book
+        library.returnBook(book);
+
+        assertEquals(1, library.getAvailableBooks().size()); 
+        assertTrue(book.isAvailable());
+    }
 }
