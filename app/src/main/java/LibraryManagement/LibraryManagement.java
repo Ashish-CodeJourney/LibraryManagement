@@ -21,7 +21,11 @@ public class LibraryManagement {
     }
 
     public void borrowBook(Book book) {
-        book.setAvailable(false);
+        if (books.contains(book) && book.isAvailable()) {
+            book.setAvailable(false);
+        } else {
+            throw new IllegalArgumentException("Book is not available or does not exist.");
+        }
     }
 
     public List<Book> getAvailableBooks() {
