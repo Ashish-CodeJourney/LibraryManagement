@@ -105,4 +105,16 @@ public class LibraryManagementTest {
         assertEquals(1, library.getAvailableBooks().size()); 
         assertTrue(book.isAvailable());
     }
+
+    @Test
+    void Test_Returning_NonBorrowed_Book() {
+        Book book = new Book("123456789", "Clean Code", "Robert C. Martin", 2008);
+        library.addBook(book);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            library.returnBook(book);
+        });
+
+        assertEquals("Book is not borrowed or does not exist.", exception.getMessage());
+    }
 }
