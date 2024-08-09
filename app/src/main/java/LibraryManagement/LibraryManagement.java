@@ -29,7 +29,11 @@ public class LibraryManagement {
     }
 
     public void returnBook(Book book) {
-        book.setAvailable(true);
+        if (books.contains(book) && !book.isAvailable()) {
+            book.setAvailable(true);
+        } else {
+            throw new IllegalArgumentException("Book is not borrowed or does not exist.");
+        }
     }
 
     public List<Book> getAvailableBooks() {
