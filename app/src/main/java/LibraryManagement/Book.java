@@ -2,13 +2,16 @@ package LibraryManagement;
 
 public class Book {
 
-    private String isbn;
-    private String title;
-    private String author;
-    private int publicationYear;
+    private final String isbn;
+    private final String title;
+    private final String author;
+    private final int publicationYear;
     private boolean isAvailable;
 
-    public Book (String isbn, String title, String author, int publicationYear) {
+    public Book(String isbn, String title, String author, int publicationYear) {
+        if (isbn == null || isbn.isEmpty()) {
+            throw new IllegalArgumentException("ISBN cannot be null or empty.");
+        }
         this.isbn = isbn;
         this.title = title;
         this.author = author;
@@ -21,7 +24,7 @@ public class Book {
     }
 
     public String getTitle() {
-         return title;
+        return title;
     }
 
     public String getAuthor() {
@@ -38,5 +41,11 @@ public class Book {
 
     public void setAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Book[ISBN=%s, Title=%s, Author=%s, Year=%d, Available=%b]",
+                             isbn, title, author, publicationYear, isAvailable);
     }
 }
