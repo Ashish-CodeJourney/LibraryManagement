@@ -20,8 +20,18 @@ public class LibraryManagement {
         books.add(book);
     }
 
+    public void borrowBook(Book book) {
+        book.setAvailable(false);
+    }
+
     public List<Book> getAvailableBooks() {
-        return new ArrayList<>(books);
+        List<Book> availableBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.isAvailable()) {
+                availableBooks.add(book);
+            }
+        }
+        return availableBooks;
     }
 
 }
