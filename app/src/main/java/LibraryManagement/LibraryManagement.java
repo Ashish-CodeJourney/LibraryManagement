@@ -12,6 +12,11 @@ public class LibraryManagement {
     }
 
     public void addBook(Book book) {
+        for (Book b : books) {
+            if (b.getIsbn().equals(book.getIsbn())) {
+                throw new IllegalArgumentException("A book with the same ISBN already exists.");
+            }
+        }
         books.add(book);
     }
 
