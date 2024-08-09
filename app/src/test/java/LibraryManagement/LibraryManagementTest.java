@@ -70,4 +70,17 @@ public class LibraryManagementTest {
         assertEquals(0, library.getAvailableBooks().size()); // Should have no available books after borrowing
         assertFalse(book.isAvailable());
     }
+
+    @Test
+    void Test_Borrowing_Unavailable_Book() {
+        Book book = new Book("123456789", "Clean Code", "Robert C. Martin", 2008);
+        library.addBook(book);
+        library.borrowBook(book);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            library.borrowBook(book);
+        });
+
+        assertEquals("Book is not available or does not exist.", exception.getMessage());
+    }
 }
