@@ -34,6 +34,15 @@ The project uses JUnit 5 for unit testing. To run the tests, use the following c
 ./gradlew test
 ```
 
+## Running Application
+
+The project can run via console, use the following command:
+
+```bash
+./gradlew runInteractive
+```
+you can use your console for user Input and use functionality of this Application
+
 ## Test Cases
 
 Here are the test cases covered in this KATA:
