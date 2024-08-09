@@ -28,6 +28,10 @@ public class LibraryManagement {
         }
     }
 
+    public void returnBook(Book book) {
+        book.setAvailable(true);
+    }
+
     public List<Book> getAvailableBooks() {
         List<Book> availableBooks = new ArrayList<>();
         for (Book book : books) {
