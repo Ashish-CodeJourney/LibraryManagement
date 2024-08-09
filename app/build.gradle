@@ -26,10 +26,18 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'LibraryManagement.LibraryManagement'
+    mainClass = 'LibraryManagement.App'
 }
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+task runInteractive(type: JavaExec) {
+    group = 'Application'
+    description = 'Runs the application with interactive input.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'LibraryManagement.App'
+    standardInput = System.in
 }
