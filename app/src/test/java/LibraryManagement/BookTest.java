@@ -1,6 +1,10 @@
 package LibraryManagement;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BookTest {
 
@@ -15,5 +19,14 @@ public class BookTest {
     @BeforeEach
     void setUp() {
         book = new Book(isbn, title, author, publicationYear);
+    }
+
+    @Test
+    void Test_BookCreation () {
+        assertEquals(isbn, book.getIsbn());
+        assertEquals(title, book.getTitle());
+        assertEquals(author, book.getAuthor());
+        assertEquals(publicationYear, book.getPublicationYear());
+        assertTrue(book.isAvailable());
     }
 }
