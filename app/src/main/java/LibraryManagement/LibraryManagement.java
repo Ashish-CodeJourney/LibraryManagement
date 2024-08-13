@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class LibraryManagement {
 
+    private int borrowCount = 0;
+
     private Map<String, Book> bookMap;
 
     public LibraryManagement() {
@@ -21,13 +23,19 @@ public class LibraryManagement {
     }
 
     public void borrowBook(Book book) {
+        if (borrowCount >= 3) {
+            throw new LimitBorrowingException("You cannot borrow more than 3 books.");
+        }
+    
         Book existingBook = bookMap.get(book.getIsbn());
         if (existingBook != null && existingBook.isAvailable()) {
             existingBook.setAvailable(false);
+            borrowCount++;
         } else {
             throw new IllegalArgumentException("Book is not available or does not exist.");
         }
     }
+    
 
     public void returnBook(Book book) {
         Book existingBook = bookMap.get(book.getIsbn());
