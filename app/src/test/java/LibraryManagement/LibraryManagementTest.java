@@ -120,4 +120,29 @@ public class LibraryManagementTest {
         assertTrue(availableBooks.contains(book2));
         assertTrue(availableBooks.contains(book3));
     }
+
+    @Test
+    void Test_NotBorrowing_more_then_3_books () {
+        Book book1 = new Book("111111111", "Working Effectively with Legacy Code", "Michael C. Feathers", 2005);
+        Book book2 = new Book("222222222", "Clean Code", "Robert C. Martin", 2008);
+        Book book3 = new Book("333333333", "The class of Java", "Pravin Jain", 2010);
+        Book book4 = new Book("444444444", "Working Effectively with Legacy Code", "Michael C. Feathers", 2005);
+
+        library.addBook(book1);
+        library.addBook(book2);
+        library.addBook(book3);
+        library.addBook(book4);
+
+        library.borrowBook(book1);
+        library.borrowBook(book2);
+        library.borrowBook(book3);
+
+        LimitBorrowingException exception = assertThrows(
+            LimitBorrowingException.class, 
+            () -> library.borrowBook(book4)
+        );
+
+        assertEquals("You cannot borrow more than 3 books.", exception.getMessage());
+
+    }
 }
